@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seismology Maps</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #005b9a;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+        }
+        header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .image-item {
+            flex: 1 1 auto;
+            max-width: 16.66%; /* 100% divided by 6 images */
+            margin: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #005b9a;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://ennatuurlijk.nl/sites/default/files/styles/1_1_medium/public/media/image/enn%20aardwarmte.jpg.webp?itok=v3U6qMkk" alt="Logo">
+        <h1>KNMI Live Seismogrammen</h1>
+    </header>
+    <div class="image-container">
+        <div class="image-item">
+            <a id="link1" target="_blank"><img id="map1" alt="Seismology Map 1"></a>
+        </div>
+        <div class="image-item">
+            <a id="link2" target="_blank"><img id="map2" alt="Seismology Map 2"></a>
+        </div>
+        <div class="image-item">
+            <a id="link3" target="_blank"><img id="map3" alt="Seismology Map 3"></a>
+        </div>
+        <div class="image-item">
+            <a id="link4" target="_blank"><img id="map4" alt="Seismology Map 4"></a>
+        </div>
+        <div class="image-item">
+            <a id="link5" target="_blank"><img id="map5" alt="Seismology Map 5"></a>
+        </div>
+        <div class="image-item">
+            <a id="link6" target="_blank"><img id="map6" alt="Seismology Map 6"></a>
+        </div>
+    </div>
+    <footer>
+        <p id="date"></p>
+    </footer>
+
+    <script>
+        // Function to format the date as YYYYMMDD
+        function formatDate(date) {
+            let year = date.getFullYear();
+            let month = ('0' + (date.getMonth() + 1)).slice(-2);
+            let day = ('0' + date.getDate()).slice(-2);
+            return `${year}${month}${day}`;
+        }
+
+        // Get the current date
+        let currentDate = new Date();
+        let formattedDate = formatDate(currentDate);
+
+        // Update the image URLs with the current date
+        let urls = [
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_J02_${formattedDate}.png`,
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_J01_${formattedDate}.png`,
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_ANDK_${formattedDate}.png`,
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_GTB_${formattedDate}.png`,
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_MDMR_${formattedDate}.png`,
+            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_WER_${formattedDate}.png`
+        ];
+
+        // Update the image and link elements
+        for (let i = 0; i < urls.length; i++) {
+            document.getElementById(`map${i + 1}`).src = urls[i];
+            document.getElementById(`link${i + 1}`).href = urls[i];
+        }
+
+        // Update the date in the footer
+        document.getElementById('date').innerText = `Datum: ${formattedDate}`;
+    </script>
+</body>
+</html>
