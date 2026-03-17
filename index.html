@@ -18,10 +18,6 @@
             display: flex;
             align-items: center;
         }
-        header img {
-            height: 50px;
-            margin-right: 20px;
-        }
         header h1 {
             margin: 0;
             font-size: 24px;
@@ -34,17 +30,23 @@
         }
         .image-item {
             flex: 1 1 auto;
-            max-width: 30.00%; /* 100% divided by 6 images */
+            max-width: 30.00%;
             margin: 10px;
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 5px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         .image-item img {
             width: 100%;
             height: auto;
+        }
+        .label {
+            padding: 5px;
+            font-weight: bold;
+            background: #f4f4f4;
         }
         footer {
             background-color: #005b9a;
@@ -56,35 +58,75 @@
 </head>
 <body>
     <header>
-        
         <h1>KNMI Live data seismische meetstations</h1>
     </header>
+
     <div class="image-container">
+
+        <!-- ORIGINAL 6 STATIONS -->
         <div class="image-item">
-            <a id="link1" target="_blank"><img id="map1" alt="Seismology Map 1"></a>
+            <a id="link-J02" target="_blank"><img id="J02"></a>
+            <div class="label">J02</div>
         </div>
+
         <div class="image-item">
-            <a id="link2" target="_blank"><img id="map2" alt="Seismology Map 2"></a>
+            <a id="link-J01" target="_blank"><img id="J01"></a>
+            <div class="label">J01</div>
         </div>
+
         <div class="image-item">
-            <a id="link3" target="_blank"><img id="map3" alt="Seismology Map 3"></a>
+            <a id="link-ANDK" target="_blank"><img id="ANDK"></a>
+            <div class="label">ANDK</div>
         </div>
+
         <div class="image-item">
-            <a id="link4" target="_blank"><img id="map4" alt="Seismology Map 4"></a>
+            <a id="link-GTB" target="_blank"><img id="GTB"></a>
+            <div class="label">GTB</div>
         </div>
+
         <div class="image-item">
-            <a id="link5" target="_blank"><img id="map5" alt="Seismology Map 5"></a>
+            <a id="link-MDMR" target="_blank"><img id="MDMR"></a>
+            <div class="label">MDMR</div>
         </div>
+
         <div class="image-item">
-            <a id="link6" target="_blank"><img id="map6" alt="Seismology Map 6"></a>
+            <a id="link-WER" target="_blank"><img id="WER"></a>
+            <div class="label">WER</div>
         </div>
+
+        <!-- YOUR 5 NEW STATIONS -->
+        <div class="image-item">
+            <a id="link-SL014" target="_blank"><img id="SL014"></a>
+            <div class="label">SL014</div>
+        </div>
+
+        <div class="image-item">
+            <a id="link-WMH4" target="_blank"><img id="WMH4"></a>
+            <div class="label">WMH4</div>
+        </div>
+
+        <div class="image-item">
+            <a id="link-OLK" target="_blank"><img id="OLK"></a>
+            <div class="label">OLK</div>
+        </div>
+
+        <div class="image-item">
+            <a id="link-NH014" target="_blank"><img id="NH014"></a>
+            <div class="label">NH014</div>
+        </div>
+
+        <div class="image-item">
+            <a id="link-PPB4" target="_blank"><img id="PPB4"></a>
+            <div class="label">PPB4</div>
+        </div>
+
     </div>
+
     <footer>
         <p id="date"></p>
     </footer>
 
     <script>
-        // Function to format the date as YYYYMMDD
         function formatDate(date) {
             let year = date.getFullYear();
             let month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -92,28 +134,32 @@
             return `${year}${month}${day}`;
         }
 
-        // Get the current date
         let currentDate = new Date();
         let formattedDate = formatDate(currentDate);
 
-        // Update the image URLs with the current date
-        let urls = [
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_J02_${formattedDate}.png`,
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_J01_${formattedDate}.png`,
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_ANDK_${formattedDate}.png`,
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_GTB_${formattedDate}.png`,
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_MDMR_${formattedDate}.png`,
-            `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_WER_${formattedDate}.png`
+        // ORIGINAL 6 + YOUR 5 NEW STATIONS
+        let stations = [
+            "J02",
+            "J01",
+            "ANDK",
+            "GTB",
+            "MDMR",
+            "WER",
+            "SL014",
+            "WMH4",
+            "OLK",
+            "NH014",
+            "PPB4"
         ];
 
-        // Update the image and link elements
-        for (let i = 0; i < urls.length; i++) {
-            document.getElementById(`map${i + 1}`).src = urls[i];
-            document.getElementById(`link${i + 1}`).href = urls[i];
-        }
+        stations.forEach(code => {
+            let url = `https://cdn.knmi.nl/knmi/map/page/seismologie/NL_${code}_${formattedDate}.png`;
+            document.getElementById(code).src = url;
+            document.getElementById(`link-${code}`).href = url;
+        });
 
-        // Update the date in the footer
         document.getElementById('date').innerText = `Datum: ${formattedDate}`;
     </script>
+
 </body>
 </html>
